@@ -1,7 +1,4 @@
-// This software was written by Naoki Shibata in 2018.   https://github.com/shibatch
-// No copyright is claimed, and the software is hereby placed in the public domain.
-
-// gcc -fopenmp -mavx2 -mfma -O3 stressavx2.c
+// This software was written by Naoki Shibata.   https://github.com/shibatch
 
 #include <stdio.h>
 #include <x86intrin.h>
@@ -25,20 +22,5 @@ void doThings(double *a) {
   if (m != 0) {
     fprintf(stderr, "Error detected\n");
     exit(-1);
-  }
-}
-
-#pragma GCC optimize ("O0")
-
-int main(int argc, char **argv) {
-  double a[NR*VL];
-  for(int i=0;i<NR*VL;i++) a[i] = 2.0;
-
-  for(;;) {
-    int i;
-#pragma omp parallel for
-    for(i=0;i<65536;i++) {
-      doThings(a);
-    }
   }
 }
